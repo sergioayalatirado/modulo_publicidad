@@ -1,7 +1,7 @@
 <?php
 include_once '../php/conexion.php';
 sleep(3);
-$titulo = $_POST['titulo_publicidad'];
+$titulo = strtoupper($_POST['titulo_publicidad']);
 $texto = $_POST['texto'];
 $fecha_inicio = $_POST['fecha_inicio'];
 $hora_inicio = $_POST['hora_inicio'];
@@ -12,11 +12,6 @@ $fk_dispositivo = $_POST['fk_dispositivo'];
 $archivo = $_FILES['archivo'];
 $tipo = $_FILES['archivo']['type'];
 $archivo_tamano = $_FILES['archivo']['size'];
-
-// Archivo 
-// $archivo = $_FILES['archivo']['name'];
-// $tipo = $_FILES['archivo']['type'];
-// $archivo_tamano = $_FILES['archivo']['size'];
 
 //Anadiendole 1 minuto al tiempo 
 $parsedHI = strtotime($hora_inicio);
@@ -48,6 +43,8 @@ $sql2 = "SELECT * FROM publicidad WHERE (fecha_hora_inicio BETWEEN'$fech_hora_in
 $verificar_duplicado = mysqli_query($mysqli, $sql2);
 $resultado_rows2 = mysqli_num_rows($verificar_duplicado);
 
+
+
 if ($resultado_rows > 0) {
 
     $lista = "<ul>"; //Ul lista
@@ -57,14 +54,6 @@ if ($resultado_rows > 0) {
         $titulo_publicidad = $fila["titulo_publicidad"];
         $fecha_hora_inicio = $fila["fecha_hora_inicio"];
         $fecha_hora_final = $fila["fecha_hora_final"];
-
-        // if ($fech_hora_inicio == $fila["fecha_hora_inicio"]) {
-        //     # code...
-        //     echo "Existe un registro con la misma hora de inicio dentro de la base de datos";
-        //     die();
-        // }else{
-        //     echo "No se ha reconocido nada";
-        // }
 
         $lista .= "<li>
         <b>TITULO DE LA PUBLICIDAD</b><br> $titulo_publicidad<br>
@@ -78,193 +67,193 @@ if ($resultado_rows > 0) {
    $fecha_hora_inicioR $fecha_hora_finalR
     <b>NOTA</b>
     <br><b>Considere elegir una fecha y hora distinta, o un horario libre para guardar su publicidad.</b>";
-} 
-////// ME QUEDE EN ESTA VALIDACION 04:27PM DEL 15/07/2021 
-
-else if ($resultado_rows2 > 0) {
-    echo "Existe un registro con la misma hora y fecha.<br>Corrija la fecha y hora de inicio y final para evitar registros duplicados.";
     die();
-} else {
-    //  echo "LA FECHA Y EL HORARIO SE ENCUENTRA LIBRE.<br>Ha pasado las validaciones del horario y fecha.";
-    //  echo "No se encuentra ningun registro dentro de la base de datos";
-    echo "Fecha y hora de inicio: " . $fech_hora_inicio . "<br>";
-    echo "Fecha y hora de final: " . $fech_hora_final;
-    echo "<br>";
+} 
 
-    if (empty($titulo)) {
-        echo "El titulo de publicidad esta vacio.";
-    } else if (empty($fecha_inicio)) {
-        echo "La fecha de inicio esta vacia.";
-    } else if (empty($hora_inicio)) {
-        echo "La hora de inicio se encuentra vacia.";
-    } else if (empty($fecha_final)) {
-        echo "La fecha final se encuentra vacia.";
-    } else if (empty($hora_final)) {
-        echo "La hora final se encuentra vacia.";
-    } else if (empty($fech_hora_inicio)) {
-        echo "Fecha Hora Inicial es requerida.";
-    } else if (empty($fech_hora_final)) {
-        echo $fech_hora_final;
-        echo "Fecha Hora Final es requerido.";
-    } else if (empty($fk_sucursal)) {
-        echo "Sucursal es requerida.";
-    } else if (empty($fk_dispositivo)) {
-        echo "Dispositivo es requerido.";
-    } else if ($fech_hora_inicio > $fech_hora_final) {
-        echo "Fecha hora final menor a la inicial, ingresa una fecha valida nuevamente.";
-    } else if ($fech_hora_inicio == $fech_hora_final) {
-        echo $fech_hora_inicio . "<br>";
-        echo $fech_hora_final;
-        echo "";
-        echo "Las fechas son identicas, por favor verifica las fechas.";
-    } else if ($_FILES['archivo']['name'] != null) { //ESTA LINEA IDENTIFICA QUE EL FILE TENGA NOMBRE OSEA QUE NO ESTE VACIO Y TAMBIEN QUE CONTENGA TEXTO
+else {
+    if($resultado_rows2 > 0){
+        echo "Se ha encontrado un registro con los mismos datos, por favor intentalo nuevamente.";
 
+    }else{
+        if (empty($titulo)) {
+            echo "El titulo de publicidad esta vacio.";
+        } else if (empty($fecha_inicio)) {
+            echo "La fecha de inicio esta vacia.";
+        } else if (empty($hora_inicio)) {
+            echo "La hora de inicio se encuentra vacia.";
+        } else if (empty($fecha_final)) {
+            echo "La fecha final se encuentra vacia.";
+        } else if (empty($hora_final)) {
+            echo "La hora final se encuentra vacia.";
+        } else if (empty($fech_hora_inicio)) {
+            echo "Fecha Hora Inicial es requerida.";
+        } else if (empty($fech_hora_final)) {
+            echo $fech_hora_final;
+            echo "Fecha Hora Final es requerido.";
+        } else if (empty($fk_sucursal)) {
+            echo "Sucursal es requerida.";
+        } else if (empty($fk_dispositivo)) {
+            echo "Dispositivo es requerido.";
+        } else if ($fech_hora_inicio > $fech_hora_final) {
+            echo "Fecha hora final menor a la inicial, ingresa una fecha valida nuevamente.";
+        } else if ($fech_hora_inicio == $fech_hora_final) {
+            echo "Las fechas son identicas, por favor verifica las fechas.";
+        } else if ($_FILES['archivo']['name'] != null) { //ESTA LINEA IDENTIFICA QUE EL FILE TENGA NOMBRE OSEA QUE NO ESTE VACIO Y TAMBIEN QUE CONTENGA TEXTO
+    
+            // echo "Hay archivo prro";
+            if ($tipo == 'image/jpg' || $tipo == 'image/png' || $tipo == 'image/jpeg' || $tipo == 'image/gif') {
+                // echo "Es una imagen prro";
+                $archivo = $_FILES["archivo"]["name"];
+                $archivo_ext = explode(".", $_FILES["archivo"]["name"]);
+                $archivo_endext = end($archivo_ext);
+                $archivo_name = strtolower(md5($archivo) . '.' . $archivo_endext);
 
-        // echo "Hay archivo prro";
-        if ($tipo == 'image/jpg' || $tipo == 'image/png' || $tipo == 'image/jpeg' || $tipo == 'image/gif') {
-            // echo "Es una imagen prro";
-            $archivo = $_FILES["archivo"]["name"];
-            $archivo_ext = explode(".", $_FILES["archivo"]["name"]);
-            $archivo_endext = end($archivo_ext);
+                $archivo_name2 = $fk_sucursal.'_'.$fk_dispositivo.'_'.$archivo_name;
+                $ruta = $_FILES['archivo']['tmp_name'];
+                $archivo_tamano = $_FILES['archivo']['size'];
+                $destino = "../../multimedia/".$archivo_name2;
+                $limit_image = 1048576; //1MB Tamano maximo
+    
+                if ($archivo_tamano > $limit_image) {
+                    echo "La imagen pesa mas de 1MB, por favor elige otra imagen de menor o igual tamaño para poder continuar.";
+                } 
+                
+                
+                else {
+    
+                    $extension_archivo = str_replace("image/", "", $tipo);
+                    $tipo_archivo = "imagen";
+    
+                    if (!copy($ruta, $destino)) {
+                        echo "<b>Error al copiar la imagen.</b>";
+                        die();
+                    } else {
+    
+                        $sql = $sql = "INSERT INTO publicidad(titulo_publicidad,url_archivo,extension_archivo,tipo_archivo,fecha_hora_inicio,fecha_hora_final,estatus,texto, fk_sucursal,fk_dispositivo)
+                        VALUES('$titulo','$archivo_name2','$extension_archivo','$tipo_archivo','$fech_hora_inicio','$fech_hora_final',1,'$texto','$fk_sucursal','$fk_dispositivo')";
+    
+                        $resultado = mysqli_query($mysqli, $sql);
+    
+                        if ($resultado > 0) {
+                            echo "Imagen guardada exitosamente.";
+                        } else {
+                            echo "Ocurrio un error al guardar la imagen.";
+                        }
+                    }
+                }
+            } 
+            
+            
+            
+            else if ($tipo == 'video/mp4' || $tipo == 'video/avi' || $tipo == 'video/flv' || $tipo == 'video/mov' || $tipo == 'video/wmv' || $tipo == 'video/H.264' || $tipo == 'video/XVID' || $tipo == 'video/RM') {
+                // echo "Hay un video prro!!";
+                $archivo = $_FILES["archivo"]["name"];
+                $video_ext = explode(".", $_FILES["archivo"]["name"]);
+                $video_endext = end($video_ext);
+                $video_name = strtolower(md5($archivo) . '.' . $video_endext);
 
+                $video_name2 = $fk_sucursal.'_'.$fk_dispositivo.'_'.$video_name;
+                $ruta = $_FILES["archivo"]["tmp_name"];
+                $tamano_video = $_FILES['archivo']['size'];
+                $destino = "../../multimedia/" . $video_name2;
+                $limit_size = 52428800; //50MB limite
+    
+                if ($tamano_video > $limit_size) {
+                    echo "El video excede el limite de 50MB, intenta nuevamente con otro archivo.<br>El archivo no se ha guardado.";
+                } 
+                
+                else {
+                    $extension_archivo = str_replace("video/", "", $tipo);
+                    $tipo_archivo = "video";
+    
+    
+                    if (!copy($ruta, $destino)) {
+                        echo "Ocurrio un error al copiar el archivo a la ruta del servidor.<br>Verifique la conexion de su servidor.";
+                        die();
+                    } 
+                    else {
+                        $sql = $sql = "INSERT INTO publicidad(titulo_publicidad,url_archivo,extension_archivo,tipo_archivo,fecha_hora_inicio,fecha_hora_final,estatus,texto, fk_sucursal,fk_dispositivo)
+                                        VALUES('$titulo','$video_name2','$extension_archivo','$tipo_archivo','$fech_hora_inicio','$fech_hora_final',1,'$texto','$fk_sucursal','$fk_dispositivo')";
+    
+                        $resultado = mysqli_query($mysqli, $sql);
+                        if ($resultado > 0) {
+                            echo "La publicidad con un video se ha guardado exitosamente.";
+                        } 
+                        else {
+                            echo "Ocurrio un error al guardar la publicidad con un video.";
+                        }
+                    }
+                }
+            } 
+            
+            
+            //PONER EN LA LECTURA DE LA RUTA DE LOS ARCHIVOS LA RUTA ../../ 
+            
+            
+            else if ($tipo == 'audio/mpeg' || $tipo == 'audio/mp3' || $tipo == 'audio/wav' || $tipo == 'audio/midi' || $tipo == 'audio/aac' || $tipo == 'audio/flac' || $tipo == 'audio/AIFF') {
+                // echo "Hay un audio prro!!";
+                $archivo = $_FILES["archivo"]["name"];
+                $audio_ext = explode('.', $_FILES['archivo']['name']);
+                $audio_endext = end($audio_ext);
+                $audio_name = strtolower(md5($archivo) . '.' . $audio_endext);
 
-
-            $archivo_name = strtolower(md5($archivo) . '.' . $archivo_endext);
-            // echo $archivo_name;
-
-            $ruta = $_FILES['archivo']['tmp_name'];
-            $archivo_tamano = $_FILES['archivo']['size'];
-            $destino = "../../multimedia/imagen/" . $archivo_name;
-            copy($ruta, $destino);
-            $extension_archivo = str_replace("image/", "", $tipo);
-            $tipo_archivo = "imagen";
-
-
-            $sql = $sql = "INSERT INTO publicidad(titulo_publicidad,url_archivo,extension_archivo,tipo_archivo,fecha_hora_inicio,fecha_hora_final,estatus,texto, fk_sucursal,fk_dispositivo)
-                VALUES('$titulo','$destino','$extension_archivo','$tipo_archivo','$fech_hora_inicio','$fech_hora_final',1,'$texto','$fk_sucursal','$fk_dispositivo')";
-
-            $resultado = mysqli_query($mysqli, $sql);
-
-            if ($resultado > 0) {
-                echo "Imagen guardada exitosamente.";
-            } else {
-                echo "Ocurrio un error al guardar la imagen.";
+                $audio_name2 = $fk_sucursal.'_'.$fk_dispositivo.'_'.$audio_name;
+                $tamano_audio = $_FILES['archivo']['size'];
+                $ruta = $_FILES["archivo"]["tmp_name"];
+                $destino = "../../multimedia/" . $audio_name2;
+    
+                $limit_size = 10485760; //10MB audio
+                if ($tamano_audio > $limit_size) {
+                    echo "El Audio excede el limite de 10MB, intenta nuevamente con otro archivo.<br>El archivo no se ha guardado.<br>";
+                } else {
+                    
+                    $extension_archivo = str_replace("audio/", "", $tipo);
+                    $tipo_archivo = "audio";
+    
+                    if(!copy($ruta, $destino)){
+                        echo "Error al copiar el audio a la ruta del servidor.<br>Por favor verifica la conexion a internet.";
+                        die();
+                    }else{
+                        $sql = $sql = "INSERT INTO publicidad(titulo_publicidad,url_archivo,extension_archivo,tipo_archivo,fecha_hora_inicio,fecha_hora_final,estatus,texto, fk_sucursal,fk_dispositivo)
+                        VALUES('$titulo','$audio_name2','$extension_archivo','$tipo_archivo','$fech_hora_inicio','$fech_hora_final',1,'$texto','$fk_sucursal','$fk_dispositivo')";
+       
+                       $resultado = mysqli_query($mysqli, $sql);
+       
+                       if ($resultado > 0) {
+                           echo "La publicidad que contiene un audio se ha guardado exitosamente.";
+                       } else {
+                           echo "Ocurrio un error al guardar el audio.";
+                       }
+                    }
+    
+                }
             }
-        } else if ($tipo == 'video/mp4' || $tipo == 'video/avi' || $tipo == 'video/flv' || $tipo == 'video/mov' || $tipo == 'video/wmv' || $tipo == 'video/H.264' || $tipo == 'video/XVID' || $tipo == 'video/RM') {
-            echo "Hay un video prro!!";
-            $archivo = $_FILES["archivo"]["name"];
-            $ruta = $_FILES["archivo"]["tmp_name"];
-            $destino = "../../multimedia/video/" . $archivo;
-            copy($ruta, $destino);
-            $extension_archivo = str_replace("video/", "", $tipo);
-            $tipo_archivo = "video";
-
-            $sql = $sql = "INSERT INTO publicidad(titulo_publicidad,url_archivo,extension_archivo,tipo_archivo,fecha_hora_inicio,fecha_hora_final,estatus,texto, fk_sucursal,fk_dispositivo)
-             VALUES('$titulo','$destino','$extension_archivo','$tipo_archivo','$fech_hora_inicio','$fech_hora_final',1,'$texto','$fk_sucursal','$fk_dispositivo')";
-
-            $resultado = mysqli_query($mysqli, $sql);
-
-            if ($resultado > 0) {
-                echo "Video guardado exitosamente.";
+        } 
+        
+        else {
+            $tipo_archivo = "texto";
+            $extension_archivo = "txt";
+            $texto = $_POST['texto'];
+    
+            $str = $texto;
+            $txtlenght = strlen($str);
+            $titulo = strtoupper($titulo);
+            if ($txtlenght < 5) {
+                echo "El texto tiene que ser mayor a 5 caracteres.";
             } else {
-                echo "Ocurrio un error.";
+    
+                $sql = "INSERT INTO publicidad(titulo_publicidad,url_archivo,extension_archivo,tipo_archivo,fecha_hora_inicio,fecha_hora_final,estatus,texto, fk_sucursal,fk_dispositivo)
+                 VALUES('$titulo','','$extension_archivo','$tipo_archivo','$fech_hora_inicio','$fech_hora_final',1,'$texto','$fk_sucursal','$fk_dispositivo')";
+                $resultado = mysqli_query($mysqli, $sql);
+    
+                if ($resultado > 0) {
+                    echo "Se ha guardado el texto exitosamente.";
+                } else {
+                    echo "Ocurrio un error al guardar el texto.";
+                }
             }
-        } else if ($tipo == 'audio/mpeg' || $tipo == 'audio/mp3' || $tipo == 'audio/wav' || $tipo == 'audio/midi' || $tipo == 'audio/aac' || $tipo == 'audio/flac' || $tipo == 'audio/AIFF') {
-            echo "Hay un audio prro!!";
-            $archivo = $_FILES["archivo"]["name"];
-            $ruta = $_FILES["archivo"]["tmp_name"];
-            $destino = "../../multimedia/audio/" . $archivo;
-            copy($ruta, $destino);
-            $extension_archivo = str_replace("audio/", "", $tipo);
-            $tipo_archivo = "audio";
-
-            $sql = $sql = "INSERT INTO publicidad(titulo_publicidad,url_archivo,extension_archivo,tipo_archivo,fecha_hora_inicio,fecha_hora_final,estatus,texto, fk_sucursal,fk_dispositivo)
-             VALUES('$titulo','$destino','$extension_archivo','$tipo_archivo','$fecha_hora_inicio','$fecha_hora_final',1,'$texto','$fk_sucursal','$fk_dispositivo')";
-
-            $resultado = mysqli_query($mysqli, $sql);
-
-            if ($resultado > 0) {
-                header("Location: ../cargar_publicidad.php?success=Guardado exitosamente!!");
-            } else {
-                header("Location: ../cargar_publicidad.php?error=Ocurrio un error&$datos_publicidad");
-            }
-        } else {
-            echo "Formato no valido";
         }
-    } else {
-        include '../php/conexion.php';
-        // echo "Es un texto";
-        $tipo_archivo = "texto";
-        $extension_archivo = "txt";
-        $texto = $_POST['texto'];
 
-        $str = $texto;
-        $txtlenght = strlen($str);
-        $titulo = strtoupper($titulo);
-        if ($txtlenght < 5) {
-            echo "El texto tiene que ser mayor a 5 caracteres";
-        } else {
-            $sql = "INSERT INTO publicidad(titulo_publicidad,url_archivo,extension_archivo,tipo_archivo,fecha_hora_inicio,fecha_hora_final,estatus,texto, fk_sucursal,fk_dispositivo)
-             VALUES('$titulo','','$extension_archivo','$tipo_archivo','$fech_hora_inicio','$fech_hora_final',1,'$texto','$fk_sucursal','$fk_dispositivo')";
-            $resultado = mysqli_query($mysqli, $sql);
-
-            if ($resultado > 0) {
-                echo "Se ha guardado el texto exitosamente.";
-            } else {
-                echo "Ocurrio un Error.";
-            }
-        }
     }
-}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // if(empty($titulo)){
-    //     echo "El titulo esta vacio es muy corto.";
-    // }else if(empty($fecha_inicio)){
-    //     echo "La fecha y hora de inicio estan vacias.";
-    // }else if(empty($fecha_final)){
-    //     echo "La fecha y hora de vencimiento estan vacias.";
-    // }else if($fecha_inicio == $fecha_final){
-    //     echo "La fecha de inicio y la fecha final son iguales.";
-    // }else if($fecha_hora_inicio > $fecha_hora_final){
-    //     echo "La fecha y hora de inicio son mayores a la fecha y hora final";
-    // }else if($fecha_hora_inicio == $fecha_hora_final){
-    //     echo "La fecha, hora de inicio son iguales a la fecha, hora de vencimiento.";
-    // }else if(empty($hora_inicio)){
-    //     echo "La hora de inicio esta vacia.";
-    // }else if(empty($hora_final)){
-    //     echo "La hora de vencimiento esta vacia";
-    // }else if(empty($fk_sucursal)){
-    //     echo "Selecciona una sucursal.";
-    // }else if(empty($fk_dispositivo)){
-    //     echo "Selecciona un dispositivo.";
-    // }
+} 

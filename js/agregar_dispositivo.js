@@ -43,7 +43,6 @@ document.getElementById("formr_dispositivo").addEventListener('submit', function
     } else if (lengthDA > 1 && lengthDA > 300) {
         alert("Se ha excedido la cantidad de caracteres en el ultimo campo.\nCon " + lengthDemas + " caracteres demas.");
     } else {
-        // alert("Los datos han sido procesados exitosamente.\nEspera un momento.")
         $.ajax({
             type: 'POST',
             url: '../php/agregar_dispositivo.php',

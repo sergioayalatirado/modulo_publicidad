@@ -63,9 +63,9 @@
                 <select name="fk_sucursal" id="fk_sucursal" class="form-control">
                     <option value="">Seleccione una sucursal</option>
                     <?php
-                    $query = $mysqli->query("SELECT * FROM sucursal");
+                    $query = $mysqli->query("SELECT * FROM sucursal WHERE estatus=1");
                     while ($valores = mysqli_fetch_array($query)) {
-                        echo '<option value="' . $valores['id_sucursal'] . '" >' . $valores['nombre_sucursal'] . ' ' . $valores['nombre_sucursal'] . '</option>';
+                        echo '<option value="' . $valores['id_sucursal'] . '" >' . $valores['nombre_sucursal'] . '</option>';
                     }
                     ?>
                 </select>

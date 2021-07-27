@@ -1,0 +1,2 @@
+Nota: Las inserciones de nuevas publicidades reflejaran los cambios dentro de los formularios de editar_publicidad_v3.php
+	las nuevas inserciones donde se probaron las funcionalidades de los formularios fueron de los ID_publicidad mayor al ID 113 

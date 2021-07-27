@@ -46,6 +46,7 @@
                 value="<?=$row['nombre_sucursal']?>"
                 placeholder="Ingresa el nombre o identificador de la sucursal" >
             </div>
+
             <!-- onkeypress="return soloLetras(event)" onpaste="return false;" -->
             <i id="mensaje_sucursal" style="color:red;" class="text-center"></i>
 
@@ -68,6 +69,8 @@
                     <a href="lista_sucursales.php"  class=" btn btn-secondary" name=>Lista de sucursales</a>
             </form>
         </div>
+
+        
             <!-- Modal -->
     <div class="modal fade" id="avisoSucursal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">

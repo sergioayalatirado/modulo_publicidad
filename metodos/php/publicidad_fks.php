@@ -1,5 +1,5 @@
 <?php 
-    include "conexion.php";
+    include "../php/conexion.php";
 
 $publicidad_fk = "SELECT * FROM publicidad p, dispositivo d , sucursal s
 WHERE p.fk_dispositivo = d.id_dispositivo AND p.fk_sucursal = s.id_sucursal";

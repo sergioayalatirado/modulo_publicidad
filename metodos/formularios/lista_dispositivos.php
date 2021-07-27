@@ -44,10 +44,10 @@
                    ?>
                         <tr>
                         <th scope="row"><?=$i?></th>
-                        <td><?php echo $rows['nombre_dispositivo']; ?></td>
-                        <td><?php echo $rows['tipo_dispositivo']; ?></td>
+                        <td><?php echo strtoupper($rows['nombre_dispositivo']); ?></td>
+                        <td><?php echo strtoupper($rows['tipo_dispositivo']); ?></td>
                         <td><?php echo $rows['device_agent']; ?></td>
-                        <td><?php echo $rows['nombre_sucursal']; ?></td>
+                        <td><?php echo strtoupper($rows['nombre_sucursal']); ?></td>
                         <td>
                             <a href="../php/baja_dispositivo.php?id=<?=$rows['id_dispositivo']?>" 
                             class="btn btn-danger" name="id_publicidad">Dar de baja</a><br><br>

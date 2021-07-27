@@ -9,8 +9,6 @@ if (isset($_GET['id'])) {
         $data = htmlspecialchars($data);
         return $data;
     }
-    // echo "Llego al php de baja_publicidad.php de la ruta metodos/php/";
-
     $id = validate($_GET['id']);
 
     $actualizar = "UPDATE publicidad SET estatus=0 WHERE id_publicidad='$id'";

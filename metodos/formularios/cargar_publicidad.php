@@ -15,39 +15,17 @@ include_once "../php/conexion.php";
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/estilo-formtxt.css">
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/1.27.0/luxon.min.js" integrity="sha512-cQXElo4AdS11Wtr5GFBmliue0OBZIhJjcSOSmF3RASBNfJMrkhF/F5JknHUm9klwHLLVG5+oiV6INy/yjgYPoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-    <!-- <link href="bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet"> -->
-    <!-- <script src="js/bootstrap-datetimepicker.min.js"></script> -->
-    <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="bootstrap/js/popper.min.js">
-    <link rel="stylesheet" href="bootstrap/js/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="bootstrap/js/bootstrap.bundle.js"> -->
-    <link rel="stylesheet" href="../../css/fontawesome/css/all.min.css">
-
-    <!-- <script type="text/javascript">
-        $(window).on("load",function() {
-            $('#avisoPublicidad').modal('show');
-        });
-    </script> -->
 </head>
 
 <body>
-
+    <div class="form-group">
+        <a href="../../modulo_publicidad/index.php">Inicio</a>
+    </div>
 
     <div class="container">
         <form action="" method="POST" enctype="multipart/form-data" id="form_publicidad">
 
-            <div class="form-group">
-                <a href="../../modulo_publicidad/index.php">Inicio</a>
-            </div>
-            <!-- <div class="link-right">
-                            <a href="crear_texto.php">Subir texto</a>
-                </div> -->
-            <label for="">NOTA 21/06/2021</label><br>
-            <a href="">Revisar subida de publicidad sin algun archivo dentro del input tipo file</a><br>
-            <a href="">Revisar que se reciban los valores de los input fechas y horas en el archivo php</a>
-            <h4 class="display-4 text-center"> Subir nueva publicidad</h4>
-            <hr><br>
+
 
             <?php if (isset($_GET['error'])) { ?>
 
@@ -63,7 +41,6 @@ include_once "../php/conexion.php";
             <?php } ?>
 
             <div class="form-group">
-                <!-- Modificar la clase del alert para que desaparezca junto con lo del parrafo que esta dentro del js de insercion -->
                 <label for="titulo" class="display-6 text-center"> Título de la publicidad</label>
                 <br><br><input type="text" onkeypress="return soloLetras(event)" class="form-control" onpaste="return false;" id="titulo_publicidad" name="titulo_publicidad" value="<?php if (isset($_GET['titulo']))                                                                                                                                                                   echo ($_GET['titulo']); ?>">
                 <i id="mensaje_titulo" class="alertas" role="alert alert-warning" style=" font-style: italic; color: red;"></i>
@@ -85,7 +62,7 @@ include_once "../php/conexion.php";
                 <select name="fk_sucursal" id="fk_sucursal" class="form-control" onpaste="return false;">
                     <option value="">----Seleccione una sucursal----</option>
                     <?php
-                    $query = $mysqli->query("SELECT * FROM sucursal");
+                    $query = $mysqli->query("SELECT * FROM sucursal WHERE estatus=1");
                     while ($valores = mysqli_fetch_array($query)) {
                         echo '<option value="' . $valores['id_sucursal'] . '" name="fk_sucursal">' . $valores['nombre_sucursal'] . ' (' . $valores['tipo_sucursal'] . ')' . '</option>';
                     }
@@ -98,7 +75,7 @@ include_once "../php/conexion.php";
                 <select name="fk_dispositivo" id="fk_dispositivo" class="form-control" onpaste="return false;">
                     <option value="">----Seleccione un dispositivo----</option>
                     <?php
-                    $query = $mysqli->query("SELECT * FROM dispositivo");
+                    $query = $mysqli->query("SELECT * FROM dispositivo WHERE estatus=1");
                     while ($valores = mysqli_fetch_array($query)) {
                         echo '<option value="' . $valores['id_dispositivo'] . '" name="fk_dispositivo">' . $valores['tipo_dispositivo'] . ' (' . $valores['nombre_dispositivo'] . ')' . '</option>';
                     }
@@ -109,8 +86,10 @@ include_once "../php/conexion.php";
 
             </div>
             <i id="aviso_contenido" style="font-style: italoc; color:red;"><br></i>
-            <label for="">Selecciona una opcion</label>
-            <button class="btn btn-danger" id="botonAccion">Incluir o solo texto</button>
+           
+           
+            <label for=""><b>Selecciona una opcion: </b></label>
+            <button class="btn btn-outline-danger" id="botonAccion"> <i> Solo Texto</i></button>
 
             <div class="form-group d-none" id="sTexto">
                 <script>
@@ -118,12 +97,8 @@ include_once "../php/conexion.php";
                 </script>
                 <p id="mensaje_solotexto" class="alert alert-info d-none" role="alert"> </p>
                 <label for="texto_descripcion" name="texto" class="display-6 text text-center">Texto</label><br><br>
-                <textarea type="text" size="5" name="texto" id="texto" onkeypress="return soloLetras(event)" cols="30" rows="10" class="form-control"><?php if (isset($_GET['texto_descripcion']))
+                <textarea type="text" size="5" name="texto" id="texto" onkeypress="return soloLetras(event)" cols="5" rows="10" class="form-control"><?php if (isset($_GET['texto_descripcion']))
                                                                                                                                                             echo ($_GET['texto_descripcion']); ?></textarea>
-                <div id="area">
-                    <h3 class="area">Si deseas leer un archivo de texto o extension .txt, suelta el archivo aqui.</h3>
-                </div>
-                <br>
             </div>
 
             <div class="form-group" id="noMedia">
@@ -139,10 +114,12 @@ include_once "../php/conexion.php";
                 <div id="audioPreview"></div>
 
             </div>
-            <!-- <button type="submit" class="btn btn-primary" name="btn_validar" id="btn_validar" text-center>Crear nueva publicidad</button> -->
             <button type="submit" class="btn btn-primary my-2 aaaa" id="btn_validar">Crear nueva publicidad</button>
+        
         </form>
     </div>
+
+
     <!-- Modal -->
     <div class="modal fade" id="avisoPublicidad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">

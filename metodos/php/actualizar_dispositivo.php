@@ -61,11 +61,7 @@ else if(isset($_POST['id_dispositivo'])){
             }
         }
     }
-    // $datos_dispositivo= 'nombre_dispositivo='.$nombre_dispositivo.'&tipo_dispositivo='.$tipo_dispositivo.'&device_agent='.$device_agent.'&sucursal='.$fk_sucursal;
-
-
 }else{
-    // header("Location: ../formularios/lista_dispositivos.php");
     echo "Entro al else";
 }
 

@@ -13,7 +13,7 @@ $mostrar = "UPDATE sucursal SET estatus=0 WHERE id_sucursal=$id";
 $resultado = mysqli_query($mysqli, $mostrar);
 
     if($resultado > 0){
-    header("Location: ../formularios/lista_sucursales.php?success=Dispositivo dado de baja exitosamente.");
+    header("Location: ../formularios/lista_sucursales.php?success=La sucursal ha sido dada de baja exitosamente.");
     }else{
         header("Location: ../formularios/lista_sucursales.php?error=Ocurrio un error.");
     }

@@ -75,18 +75,18 @@
                                     $archivo = $rows['tipo_archivo'];
                                     if ($archivo != 'texto') {
                                         if ($archivo == 'imagen') {
-                                            echo "<a href='../../multimedia/imagen/$url_arch' class='btn btn-primary'>Reproducir</a>";
+                                            echo "<a href='../../multimedia/$url_arch' class='btn btn-primary'>Reproducir</a>";
                                         } else if ($archivo == 'audio') {
-                                            echo "<a href='../../multimedia/audio/$url_arch' class='btn btn-primary'>Reproducir</a>";
+                                            echo "<a href='../../multimedia/$url_arch' class='btn btn-primary'>Reproducir</a>";
                                         } else if ($archivo == 'video') {
-                                            echo "<a href='../../multimedia/video/$url_arch' class='btn btn-primary'>Reproducir</a>";
+                                            echo "<a href='../../multimedia/$url_arch' class='btn btn-primary'>Reproducir</a>";
                                         }
                                         // echo "<a href='' class='btn btn-primary'>Reproducir</a>";   
                                     }
                                     ?>
                                     <br>
                                     <br>
-                                    <a href="../formularios/editar_publicidad.php?id=<?= $rows['id_publicidad'] ?>" class="btn btn-warning">Editar datos</a><br><br>
+                                    <a href="../formularios/editar_publicidad_v3.php?id=<?= $rows['id_publicidad'] ?>" class="btn btn-warning">Editar datos</a><br><br>
 
                                     <a href="../php/baja_publicidad.php?id=<?= $rows['id_publicidad'] ?>" class="btn btn-danger">Eliminar publicidad</a>
     

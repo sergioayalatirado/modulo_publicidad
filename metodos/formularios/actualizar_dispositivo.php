@@ -40,17 +40,12 @@
             <?php } ?>
 
             <div class="form-group">
-                <label for="name">Nombre del dispositivo(Apodo)</label>
-                <h6>Ej: Sala de juntas</h6><br>
+                <label for="name">Nombre del dispositivo:</label>
                 <input type="text" class="form-control" id="nombre_dispositivo" name="nombre_dispositivo" value="<?= $row['nombre_dispositivo'] ?>" placeholder="Ingresa el nombre o apodo del dispositivo">
             </div>
             <hr>
             <div class="form-group">
-                <label for="tipo_dispositivo">Tipo de dispositivo</label><br>
-                <label for="">Dispositivo actual:</label>
-                <?= $row['tipo_dispositivo'] ?><br>
-
-
+                <label for="tipo_dispositivo">Tipo de dispositivo:</label>
                 <select name="tipo_dispositivo" id="tipo_dispositivo" class="form-control">
                     <option value="">---Seleccione un dispositivo---</option>
                     <!-- 
@@ -64,14 +59,14 @@
                         }
                     }
                     ?> -->
-                    <option value="TELEVISION">TELEVISION</option>
-                    <option value="COMPUTADORA">COMPUTADORA</option>
-                    <option value="SMARTPHONE">SMARTPHONE</option>
+                    <option <?=($row['tipo_dispositivo'] == "TELEVISION") ? 'SELECTED' : '123' ;?> value="TELEVISION">TELEVISION</option>
+                    <option <?=($row['tipo_dispositivo'] == "COMPUTADORA") ? 'SELECTED' : '456' ;?> value="COMPUTADORA">COMPUTADORA</option>
+                    <option <?=($row['tipo_dispositivo'] == "SMARTPHONE") ? 'SELECTED' : '789' ;?> value="SMARTPHONE">SMARTPHONE</option>
                 </select>
             </div>
             <hr>
             <div class="form-group">
-                <label for="tipo_dispositivo">Sucursal</label>
+                <label for="tipo_dispositivo">Sucursal:</label>
                 <select name="fk_sucursal" id="fk_sucursal" class="form-control">
                     <option value="">----Seleccione una sucursal----</option>
                     <?php

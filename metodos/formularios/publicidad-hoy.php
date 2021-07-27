@@ -71,7 +71,7 @@
                             <a href="../php/reproductor-only.php?id=<?=$rows['id_publicidad']?>" 
                             class="btn btn-primary" name="id_publicidad">Reproducir</a><br><br>
                             
-                            <a href="../formularios/editar_publicidad_v2.php?id=<?=$rows['id_publicidad']?>" 
+                            <a href="../formularios/editar_publicidad_v3.php?id=<?=$rows['id_publicidad']?>" 
                                class="btn btn-warning">Editar datos</a><br><br>
                             
                             <a href="../php/baja_publicidad.php?id=<?=$rows['id_publicidad']?>" 
