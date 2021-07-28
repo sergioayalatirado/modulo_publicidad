@@ -21,22 +21,23 @@ function validate($data){
     $texto = $resultado['texto'];
     $tipo = $resultado['tipo_archivo'];
 
-    //MOSTRAR SI LA VARIABLE $IMAGEN ESTA NULA
-    echo strtoupper($tipo).'.<br>';
-
+    
 
     //VALIDAR QUE NO TENGAN VALORES IMAGEN, VIDEO O TEXTO
     if($archivo==null || $archivo="" || $archivo == false){
                 echo strtoupper("No hay ningun tipo de archivo dentro de la url archivo.<br>");
     }else{
+        $ar = $resultado['url_archivo'];
+       
         if($tipo=='imagen'){
-                echo strtoupper("Hay una imagen.<br>");
+
+                echo "<img src='../../multimedia/$ar'></img>";              
         }else if($tipo=='video'){
-                echo strtoupper("Hay un video.<br>");
+                echo "<embed src='../../multimedia/$ar' alt='250' width='500' height='400'></embed>";              
         }else if($tipo=='texto'){
                 echo strtoupper("Hay texto.<br>");
         }else if($tipo=='audio'){
-                echo strtoupper('Hay un audio.<br>');
+                 echo "<embed src='../../multimedia/$ar'></embed>";              
         }
     }
 }

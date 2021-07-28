@@ -40,17 +40,6 @@ function soloLetras(e) {
     }
 }
 
-function checkDate() {
-    var fecha_inicio = document.getElementById('fecha_hora_inicio');
-    var fecha_final = document.getElementById('fecha_hora_final');
-    if (fecha_final < fecha_inicio) {
-        alert("La fecha final no puede ser menor que la fecha de inicio.");
-        return false;
-    }
-    return true;
-}
-
-
 var estaOculto=false;
 
 $('#botonAccion').click(function(event){

@@ -40,8 +40,6 @@ document.getElementById("forma-sucursal").addEventListener('submit', function (e
     }else if(tipo_sucursal == ""){
         alert("Selecciona un tipo de sucursal.");
     }else{
-        alert("Se han validado todos los campos");
-        // $("#form-agregarsucursal").unbind('submit').submit();
         $.ajax({
             type: 'POST',
             url: '../php/actualizar_sucursal.php',

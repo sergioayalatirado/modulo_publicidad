@@ -12,18 +12,6 @@ document.getElementById("forma_dispositivo").addEventListener("submit", function
     var fs_length = fk_sucursal.length;
     var da_length = device_agent.length;
 
-    console.log("Values");
-    console.log(nombre_dispositivo);
-    console.log(tipo_dispositivo);
-    console.log(fk_sucursal);
-    console.log(device_agent);
-    console.log("");
-    console.log("Lengths")
-    console.log(nd_length);
-    console.log(td_length);
-    console.log(fs_length);
-    console.log(da_length);
-    console.log(id_dispositivo);
 
     if(nombre_dispositivo == "" || nd_length == 0){
         alert("El nombre del dispositivo se encuentra vacio.");

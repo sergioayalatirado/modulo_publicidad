@@ -51,7 +51,7 @@
             </div>
 
             <br>
-            <button type="submit" class="btn btn-primary" id="btn_esucursal" name='crear'>Crear</button>
+            <button type="submit" class="btn btn-primary" id="btn_esucursal" name='crear'>Guardar sucursal</button>
             <a href="../formularios/lista_sucursales.php" class=" btn btn-secondary">Mostrar sucursales</a>
         </form>
     </div>

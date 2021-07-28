@@ -20,11 +20,11 @@
 
 <body>
     <div class="container">
-        <form action="php/agregar_dispositivo.php" method="POST" id="formr_dispositivo" name="formr_dispositivo">
         <a href="../../modulo_publicidad/index.php">Index</a> <br>
+        <a href="../formularios/lista_dispositivos.php">Lista de dispositivos</a><br>
+        <i >Revision: 16/07/2021 - Todo funcional</i>
+        <form action="php/agregar_dispositivo.php" method="POST" id="formr_dispositivo" name="formr_dispositivo">
 
-            <a href="../formularios/lista_dispositivos.php">Lista de dispositivos</a><br>
-            <a href="">Revision: 16/07/2021 - Todo funcional</a>
             <h4 class="display-4 text-center">Registrar nuevo dispositivo</h4>
             <hr><br>
 

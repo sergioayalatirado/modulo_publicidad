@@ -19,9 +19,11 @@
 
 <body>
     <div class="container">
+        <a href="../../modulo_publicidad/index.php">Index</a> <br>
+        <a href="../formularios/lista_dispositivos.php">Lista de dispositivos</a>
+
         <form action="../php/actualizar_dispositivo.php" method="post" id="forma_dispositivo" name="forma_dispositivo">
-            <a href="../../modulo_publicidad/index.php">Index</a> <br>
-            <a href="../formularios/lista_dispositivos.php">Lista de dispositivos</a>
+
             <h4 class="display-4 text-center">Actualizar dispositivo</h4>
             <hr><br>
 
@@ -59,9 +61,9 @@
                         }
                     }
                     ?> -->
-                    <option <?=($row['tipo_dispositivo'] == "TELEVISION") ? 'SELECTED' : '123' ;?> value="TELEVISION">TELEVISION</option>
-                    <option <?=($row['tipo_dispositivo'] == "COMPUTADORA") ? 'SELECTED' : '456' ;?> value="COMPUTADORA">COMPUTADORA</option>
-                    <option <?=($row['tipo_dispositivo'] == "SMARTPHONE") ? 'SELECTED' : '789' ;?> value="SMARTPHONE">SMARTPHONE</option>
+                    <option <?= ($row['tipo_dispositivo'] == "TELEVISION") ? 'SELECTED' : '123'; ?> value="TELEVISION">TELEVISION</option>
+                    <option <?= ($row['tipo_dispositivo'] == "COMPUTADORA") ? 'SELECTED' : '456'; ?> value="COMPUTADORA">COMPUTADORA</option>
+                    <option <?= ($row['tipo_dispositivo'] == "SMARTPHONE") ? 'SELECTED' : '789'; ?> value="SMARTPHONE">SMARTPHONE</option>
                 </select>
             </div>
             <hr>
@@ -70,7 +72,7 @@
                 <select name="fk_sucursal" id="fk_sucursal" class="form-control">
                     <option value="">----Seleccione una sucursal----</option>
                     <?php
-                    $query = $mysqli->query("SELECT * FROM sucursal ");
+                    $query = $mysqli->query("SELECT * FROM sucursal");
                     while ($valores = mysqli_fetch_array($query)) {
                         // echo '<option value="'.$valores['id_sucursal'].'" name="fk_sucursal">'.$valores['nombre_sucursal'].'</option>';
                         if ($valores["id_sucursal"] == $row["fk_sucursal"]) {

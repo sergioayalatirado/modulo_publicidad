@@ -1,4 +1,5 @@
-<?php include_once "../php/editar_publicidad.php";
+<?php 
+      include_once "../php/editar_publicidad.php";
       include_once "../php/var_editar_publicidad_v3.php";
 ?>
 <!DOCTYPE html>

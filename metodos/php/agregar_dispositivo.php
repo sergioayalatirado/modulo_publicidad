@@ -29,6 +29,8 @@ if ($resultado_rows > 0) {
         echo "Tipo de dispositivo requerido";
     } else if (empty($fk_sucursal)) {
         echo "Sucursal requerida.";
+    }else if ($devicelenght < 5 || $devicelenght > 35){
+        echo "Recuerda de que el titulo del dispositivo debe ser mayor a 5 y menor a 35 caracteres.";
     } else {
         $sql = "INSERT INTO dispositivo (nombre_dispositivo,tipo_dispositivo,device_agent, fk_sucursal) VALUES('$nombre_dispositivo','$tipo_dispositivo','$device_agent','$fk_sucursal')";
         $resultado = mysqli_query($mysqli, $sql);

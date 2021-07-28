@@ -19,16 +19,6 @@ function soloLetras(e) {
     }
 }
 
-function checkDate() {
-    var fecha_inicio = document.getElementById('fecha_hora_inicio');
-    var fecha_final = document.getElementById('fecha_hora_final');
-    if (fecha_final < fecha_inicio) {
-        alert("La fecha final no puede ser menor que la fecha de inicio.");
-        return false;
-    }
-    return true;
-}
-
 
 document.getElementById('archivo').addEventListener('change', function (event) {
 
@@ -188,14 +178,13 @@ document.getElementById('form_publicidad').addEventListener('submit', function (
     } else if (inputSfechaInicio == "" || inputSfechaFinal == "" || inputShoraInicio == "" || inputShoraFinal == "") {
         alert("Favor de llenar las fechas y horas faltantes.");
     }
-    //Revisar 
     else if (iFechaHInicio == iFechaHFinal) {
         alert("La fecha y hora de inicio y final no pueden ser identicas.\nVerifica e intentalo nuevamente.");
     } //Esta linea sirve para validar los formatos de fecha
     else if (nDateH > iFechaHInicio) {
         alert("Ingresa una fecha inicial posterior a la fecha actual.");
     } else if (iFechaHInicio < nDateH) {
-        alert("La fecha y hora de inicio no puede ser menor a la fecha y hora actual.\n" + iFechaHInicio + "\n" + nDateH);
+        alert("La fecha y hora de inicio no puede ser menor a la fecha y hora actual." );
     } else if (iFechaHFinal < nDateH) {
         console.log(hora_actual);
         alert("La fecha y hora final no puede ser menor a la fecha y hora actual.");
@@ -207,8 +196,6 @@ document.getElementById('form_publicidad').addEventListener('submit', function (
         alert("La hora INICIAL es mayor o igual a la hora FINAL.");
     } else if (nDateH > iFechaHFinal) {
         alert("La fecha de hoy es mayor a la final.");
-    } else if (iFechaHInicio < nDateH) {
-        alert("La fecha de inicio no puede ser menor a la actual.");
     } else if (iFechaHInicio > iFechaHFinal) {
         alert("La fecha de inicio es mayor a la fecha final.");
     } else if (iFechaHInicio == iFechaHFinal) {
