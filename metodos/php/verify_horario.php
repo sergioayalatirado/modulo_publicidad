@@ -38,6 +38,10 @@ $verificar_horario = mysqli_query($mysqli, $sql);
 $resultado_rows = mysqli_num_rows($verificar_horario);
 
 //CONSULTA PARA VERIFICAR EL DUPLICADO DE INSERCIONES DE REGISTROS O YA EXISTENTES DENTRO DE LA BASE DE DATOS
+
+//REVISION 01-09-2021 (REVISAR TODA LA ESTRUCTURA DE ESTE ARCHIVO YA QUE QUEDO PENDIENTE)
+//REVISAR ESTA CONSULTA YA QUE NO SE PUEDEN INSERTAR VALORES CON FECHAS ENTRE TAL Y TAL POR IDENTIFICARLAS COMO DUPLICADOS.
+//SE DEBE DE CAMBIAR LA FECHA Y HORA PARA PODER INSERTAR UNA NUEVA PUBLICIDAD 
 $sql2 = "SELECT * FROM publicidad WHERE (fecha_hora_inicio BETWEEN'$fech_hora_inicio' AND '$fech_hora_final') OR 
 (fecha_hora_final BETWEEN '$fech_hora_inicio' AND '$fech_hora_final')";
 $verificar_duplicado = mysqli_query($mysqli, $sql2);

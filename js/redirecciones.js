@@ -1,7 +1,12 @@
 
+//LOS VALORES QUE SE OBTIENEN A TRAVES DE LA URL COMO id_dispositivo, id_sucursal, id_publicidad y id_publicidadpt SE OBTIENEN A TRAVES DEL DATATABLE en el archivo formularios/tables_publicidadeshoy.php 
+//DONDE SE OBTIENEN LOS VALORES id_publicidadpt DONDE SEGUN SU TIPO DE CONTENIDO ES EL REPRODUCTOR QUE SE MOSTRARA 
+
 id_dispositivo = obtenerParametro('id_dispositivo')
 id_sucursal = obtenerParametro('id_sucursal')
 id_publicidad = obtenerParametro('id_publicidad')
+
+//ESTE PARAMETRO SE OBTIENE DEL REPRODUCIR PUBLICIDAD EN CURSO DEL ARCHIVO DATATABLE formuarlios/tables_publicidadeshoy.php
 id_publicidadpt = obtenerParametro('id_publicidadpt')
 
 if (id_dispositivo.length > 0) {
@@ -37,5 +42,6 @@ function obtenerParametro(name) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+//ESTO FUNCIONA PARA QUE NO QUEDE RASTRO DE LA URL ANTERIOR DENTRO DE LA BARRA DE DIRECCIONES
 var newURL = location.href.split("?")[0];
 window.history.pushState('object', document.title, newURL);

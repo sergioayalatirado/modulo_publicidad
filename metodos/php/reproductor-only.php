@@ -1,4 +1,6 @@
 <?php
+
+//EL ID DE id_publicidadpt VIENE DEL ARCHIVO DE EDICION DE PUBLICIDADES O LISTA DE PUBLICIDADES DEL DATATABLE
 if (isset($_GET['id_publicidadpt'])) {
         include "../php/conexion.php";
 
